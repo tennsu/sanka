@@ -75,11 +75,11 @@
   <h1>参加申し込みフォーム</h1>
 
   <!-- ▼▼▼ FormspreeのURLをここに貼る ▼▼▼ -->
-  <form action="https://formspree.io/f/mjkaevva" method="POST">
+  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
     <input type="text" name="_gotcha" style="display:none" />
 
-    <label for="name">お名前</label>
-    <input type="text" id="name" name="name" placeholder="例：山田 太郎" required />
+    <label for="name">国名</label>
+    <input type="text" id="name" name="name" placeholder="例：〇〇国" required />
 
     <label for="email">メールアドレス</label>
     <input type="email" id="email" name="email" placeholder="例：example@email.com" required />
@@ -89,25 +89,18 @@
       <option value="">選択してください</option>
       <option value="一般参加">一般参加</option>
       <option value="スタッフ">スタッフ</option>
-      <option value="ゲスト">ゲスト</option>
     </select>
 
     <!-- 一般参加用 -->
     <div id="general-fields" class="hidden">
       <label for="group">所属グループ（任意）</label>
-      <input type="text" id="group" name="group" placeholder="例：Aチーム" />
+      <input type="text" id="group" name="group" placeholder="例：〇〇世界線" />
     </div>
 
     <!-- スタッフ用 -->
     <div id="staff-fields" class="hidden">
       <label for="role">担当内容</label>
-      <input type="text" id="role" name="role" placeholder="例：受付、音響など" />
-    </div>
-
-    <!-- ゲスト用 -->
-    <div id="guest-fields" class="hidden">
-      <label for="inviter">紹介者名</label>
-      <input type="text" id="inviter" name="inviter" placeholder="例：鈴木 花子" />
+      <input type="text" id="role" name="role" placeholder="例：wiki編集" />
     </div>
 
     <label for="message">参加の意気込みやコメント</label>
@@ -125,16 +118,13 @@
     const category = document.getElementById("category");
     const generalFields = document.getElementById("general-fields");
     const staffFields = document.getElementById("staff-fields");
-    const guestFields = document.getElementById("guest-fields");
 
     category.addEventListener("change", function() {
       generalFields.classList.add("hidden");
       staffFields.classList.add("hidden");
-      guestFields.classList.add("hidden");
 
       if (this.value === "一般参加") generalFields.classList.remove("hidden");
       if (this.value === "スタッフ") staffFields.classList.remove("hidden");
-      if (this.value === "ゲスト") guestFields.classList.remove("hidden");
     });
   </script>
 </body>
