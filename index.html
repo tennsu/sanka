@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>参加ページ</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>参加申し込みフォーム</title>
   <style>
     body {
       font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
@@ -32,7 +32,7 @@
       color: #333;
     }
 
-    input, textarea {
+    input, textarea, select {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -59,6 +59,10 @@
       background-color: #0056b3;
     }
 
+    .hidden {
+      display: none;
+    }
+
     .thanks {
       text-align: center;
       margin-top: 25px;
@@ -68,29 +72,70 @@
   </style>
 </head>
 <body>
-  <h1>参加</h1>
+  <h1>参加申し込みフォーム</h1>
 
-  <!-- ▼▼▼ FormspreeのフォームURLをここに貼り付けてください ▼▼▼ -->
-  <!-- 例：https://formspree.io/f/mnqywxyz -->
+  <!-- ▼▼▼ FormspreeのURLをここに貼る ▼▼▼ -->
   <form action="https://formspree.io/f/mjkaevva" method="POST">
-    <!-- スパム防止（Bot対策） -->
-    <input type="text" name="_gotcha" style="display:none">
+    <input type="text" name="_gotcha" style="display:none" />
 
     <label for="name">お名前</label>
-    <input type="text" id="name" name="name" required>
+    <input type="text" id="name" name="name" placeholder="例：山田 太郎" required />
 
     <label for="email">メールアドレス</label>
-    <input type="email" id="email" name="email" required>
+    <input type="email" id="email" name="email" placeholder="例：example@email.com" required />
 
-    <label for="message">参加内容</label>
-    <textarea id="message" name="message" rows="6" required></textarea>
+    <label for="category">参加区分</label>
+    <select id="category" name="category" required>
+      <option value="">選択してください</option>
+      <option value="一般参加">一般参加</option>
+      <option value="スタッフ">スタッフ</option>
+      <option value="ゲスト">ゲスト</option>
+    </select>
 
-    <!-- メールの件名 -->
-    <input type="hidden" name="subject" value="サイトからの連絡">
+    <!-- 一般参加用 -->
+    <div id="general-fields" class="hidden">
+      <label for="group">所属グループ（任意）</label>
+      <input type="text" id="group" name="group" placeholder="例：Aチーム" />
+    </div>
 
-    <button type="submit">送信する</button>
+    <!-- スタッフ用 -->
+    <div id="staff-fields" class="hidden">
+      <label for="role">担当内容</label>
+      <input type="text" id="role" name="role" placeholder="例：受付、音響など" />
+    </div>
+
+    <!-- ゲスト用 -->
+    <div id="guest-fields" class="hidden">
+      <label for="inviter">紹介者名</label>
+      <input type="text" id="inviter" name="inviter" placeholder="例：鈴木 花子" />
+    </div>
+
+    <label for="message">参加の意気込みやコメント</label>
+    <textarea id="message" name="message" rows="5" placeholder="自由にお書きください"></textarea>
+
+    <input type="hidden" name="subject" value="参加申し込みフォームからのメッセージ" />
+
+    <button type="submit">申し込む</button>
   </form>
 
-  <p class="thanks">送信すると、ご指定のメールアドレスに内容が届きます。</p>
+  <p class="thanks">送信すると、登録されたメールアドレスに確認メールが届きます。</p>
+
+  <script>
+    // 参加区分によって入力欄を切り替える
+    const category = document.getElementById("category");
+    const generalFields = document.getElementById("general-fields");
+    const staffFields = document.getElementById("staff-fields");
+    const guestFields = document.getElementById("guest-fields");
+
+    category.addEventListener("change", function() {
+      generalFields.classList.add("hidden");
+      staffFields.classList.add("hidden");
+      guestFields.classList.add("hidden");
+
+      if (this.value === "一般参加") generalFields.classList.remove("hidden");
+      if (this.value === "スタッフ") staffFields.classList.remove("hidden");
+      if (this.value === "ゲスト") guestFields.classList.remove("hidden");
+    });
+  </script>
 </body>
 </html>
