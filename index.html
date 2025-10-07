@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>参加ページ</title>
+  <style>
+    body {
+      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+      background-color: #f0f3f5;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      max-width: 480px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 1em;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .thanks {
+      text-align: center;
+      margin-top: 25px;
+      color: #28a745;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>参加</h1>
+
+  <!-- ▼▼▼ FormspreeのフォームURLをここに貼り付けてください ▼▼▼ -->
+  <!-- 例：https://formspree.io/f/mnqywxyz -->
+  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <!-- スパム防止（Bot対策） -->
+    <input type="text" name="_gotcha" style="display:none">
+
+    <label for="name">お名前</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">メールアドレス</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">参加内容</label>
+    <textarea id="message" name="message" rows="6" required></textarea>
+
+    <!-- メールの件名 -->
+    <input type="hidden" name="subject" value="サイトからの連絡">
+
+    <button type="submit">送信する</button>
+  </form>
+
+  <p class="thanks">送信すると、ご指定のメールアドレスに内容が届きます。</p>
+</body>
+</html>
